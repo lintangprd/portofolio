@@ -2,56 +2,6 @@
    GIS ANALYST PORTFOLIO — APP.JS
    ═══════════════════════════════════════════ */
 
-// ── Embedded GeoJSON Data (Offline & Local File Guaranteed) ──
-const DRONE_SURVEY_DATA = {
-  "type": "FeatureCollection",
-  "features": [
-    { "type": "Feature", "properties": { "Location": "Tabanan, Bali" }, "geometry": { "type": "Point", "coordinates": [ 115.126709, -8.418152 ] } },
-    { "type": "Feature", "properties": { "Location": "Banyuwangi, East Java" }, "geometry": { "type": "Point", "coordinates": [ 114.350376, -8.147154 ] } },
-    { "type": "Feature", "properties": { "Location": "Flores, East Nusa Tenggara" }, "geometry": { "type": "Point", "coordinates": [ 121.362784, -8.708448 ] } },
-    { "type": "Feature", "properties": { "Location": "Garut, West Java" }, "geometry": { "type": "Point", "coordinates": [ 107.812521, -7.132299 ] } },
-    { "type": "Feature", "properties": { "Location": "South East Sumba, East Nusa Tenggara" }, "geometry": { "type": "Point", "coordinates": [ 119.008852, -9.541857 ] } },
-    { "type": "Feature", "properties": { "Location": "Mimika, Central Papua" }, "geometry": { "type": "Point", "coordinates": [ 136.874604, -4.620064 ] } }
-  ]
-};
-
-const PROGRAM_TRACKING_DATA = {
-  "type": "FeatureCollection",
-  "features": [
-    { "type": "Feature", "properties": { "Project": "Forest Restoration Monitoring", "Location": "Medan, North Sumatra", "Status": "Completed", "Progress": "100%", "Field Team": "Sumatra Alpha (4 staff)", "Target Area": "1,200 Ha" }, "geometry": { "type": "Point", "coordinates": [98.6722, 3.5952] } },
-    { "type": "Feature", "properties": { "Project": "Peatland Hydrology Sensor Array", "Location": "Pekanbaru, Riau", "Status": "In Progress", "Progress": "72%", "Field Team": "Central Peat Unit (3 staff)", "Target Area": "3,400 Ha" }, "geometry": { "type": "Point", "coordinates": [101.4478, 0.5071] } },
-    { "type": "Feature", "properties": { "Project": "Canopy Cover & Carbon Verification", "Location": "Palangkaraya, Central Kalimantan", "Status": "In Progress", "Progress": "85%", "Field Team": "Borneo Ecology Group (4 staff)", "Target Area": "5,800 Ha" }, "geometry": { "type": "Point", "coordinates": [113.9213, -2.2161] } },
-    { "type": "Feature", "properties": { "Project": "Watershed Boundary Delineation", "Location": "Samarinda, East Kalimantan", "Status": "Completed", "Progress": "100%", "Field Team": "Mahakam Hydrology (3 staff)", "Target Area": "2,150 Ha" }, "geometry": { "type": "Point", "coordinates": [117.1536, -0.5022] } },
-    { "type": "Feature", "properties": { "Project": "Coastal Mangrove Spatial Audit", "Location": "Makassar, South Sulawesi", "Status": "In Progress", "Progress": "60%", "Field Team": "Sulawesi Marine GIS (2 staff)", "Target Area": "850 Ha" }, "geometry": { "type": "Point", "coordinates": [119.4327, -5.1477] } },
-    { "type": "Feature", "properties": { "Project": "Highland Agroforestry Baseline", "Location": "Jayapura, Papua", "Status": "Planning", "Progress": "25%", "Field Team": "Eastern Operations (2 staff)", "Target Area": "4,100 Ha" }, "geometry": { "type": "Point", "coordinates": [140.7181, -2.5916] } },
-    { "type": "Feature", "properties": { "Project": "Urban Microclimate Assessment", "Location": "Bandung, West Java", "Status": "Completed", "Progress": "100%", "Field Team": "Java Regional (3 staff)", "Target Area": "920 Ha" }, "geometry": { "type": "Point", "coordinates": [107.6191, -6.9175] } }
-  ]
-};
-
-const POTENTIAL_ANALYSIS_DATA = {
-  "type": "FeatureCollection",
-  "features": [
-    { "type": "Feature", "properties": { "Zone": "South Garut Solar & Micro-hydro Hub", "Classification": "High Potential Tier 1", "Suitability Score": "94/100", "Terrain Slope": "4.2% (Optimal)", "Solar Yield": "5.6 kWh/m²/day", "Status": "Approved" }, "geometry": { "type": "Point", "coordinates": [107.7850, -7.3820] } },
-    { "type": "Feature", "properties": { "Zone": "Kupang Renewable Energy Corridor", "Classification": "High Potential Tier 1", "Suitability Score": "92/100", "Terrain Slope": "3.1% (Flat plain)", "Solar Yield": "5.9 kWh/m²/day", "Status": "Approved" }, "geometry": { "type": "Point", "coordinates": [123.6070, -10.1772] } },
-    { "type": "Feature", "properties": { "Zone": "Sumba Agro-Ecological Development Zone", "Classification": "Moderate Potential Tier 2", "Suitability Score": "78/100", "Terrain Slope": "7.5% (Rolling)", "Water Proximity": "1.4 km", "Status": "Under Assessment" }, "geometry": { "type": "Point", "coordinates": [119.8970, -9.6540] } },
-    { "type": "Feature", "properties": { "Zone": "North Bali Eco-Corridor", "Classification": "High Potential Tier 1", "Suitability Score": "88/100", "Terrain Slope": "5.0% (Gentle)", "Road Access": "320m", "Status": "Approved" }, "geometry": { "type": "Point", "coordinates": [115.1950, -8.2150] } },
-    { "type": "Feature", "properties": { "Zone": "East Kutai Sustainable Forestry Zone", "Classification": "High Potential Tier 1", "Suitability Score": "89/100", "Terrain Slope": "6.1%", "Soil Fertility": "Class II Alluvial", "Status": "Approved" }, "geometry": { "type": "Point", "coordinates": [117.4800, 0.4200] } },
-    { "type": "Feature", "properties": { "Zone": "South Merauke Biomass Expansion Area", "Classification": "Moderate Potential Tier 2", "Suitability Score": "74/100", "Terrain Slope": "1.5% (Floodplain)", "Drainage Class": "Moderate", "Status": "Under Assessment" }, "geometry": { "type": "Point", "coordinates": [140.4000, -8.4900] } }
-  ]
-};
-
-const BAMBOO_IDENTIFICATION_DATA = {
-  "type": "FeatureCollection",
-  "features": [
-    { "type": "Feature", "properties": { "Species": "Dendrocalamus asper (Petung Bamboo)", "Location": "Bangli, Bali", "Canopy Density": "88%", "Plot Extent": "42.5 Hectares", "Avg Culm Height": "22 meters", "Application": "Heavy Construction & Laminated Timber" }, "geometry": { "type": "Point", "coordinates": [115.3533, -8.4542] } },
-    { "type": "Feature", "properties": { "Species": "Gigantochloa apus (Tali Bamboo)", "Location": "Flores Hillslopes, NTT", "Canopy Density": "76%", "Plot Extent": "68.2 Hectares", "Avg Culm Height": "14 meters", "Application": "Woven Handicrafts & Structural Binding" }, "geometry": { "type": "Point", "coordinates": [120.9500, -8.6200] } },
-    { "type": "Feature", "properties": { "Species": "Gigantochloa atter (Hitam / Black Bamboo)", "Location": "Garut Agroforestry Plots, West Java", "Canopy Density": "82%", "Plot Extent": "34.0 Hectares", "Avg Culm Height": "16 meters", "Application": "Premium Furniture & Carbon Sequestration" }, "geometry": { "type": "Point", "coordinates": [107.8900, -7.2100] } },
-    { "type": "Feature", "properties": { "Species": "Bambusa blumeana (Duri / Thorny Bamboo)", "Location": "Ngada Plateau, Flores", "Canopy Density": "65%", "Plot Extent": "51.8 Hectares", "Avg Culm Height": "18 meters", "Application": "Riparian Soil Stabilization & Bio-fencing" }, "geometry": { "type": "Point", "coordinates": [121.0200, -8.7600] } },
-    { "type": "Feature", "properties": { "Species": "Dendrocalamus asper (Petung Bamboo)", "Location": "Banyuwangi Slope Buffer, East Java", "Canopy Density": "91%", "Plot Extent": "29.4 Hectares", "Avg Culm Height": "24 meters", "Application": "Engineered Bamboo Poles & Shoot Harvesting" }, "geometry": { "type": "Point", "coordinates": [114.2800, -8.2400] } },
-    { "type": "Feature", "properties": { "Species": "Schizostachyum brachycladum (Kuning / Yellow Bamboo)", "Location": "Tabanan Riverine Corridor, Bali", "Canopy Density": "70%", "Plot Extent": "18.6 Hectares", "Avg Culm Height": "12 meters", "Application": "Riverbank Bio-engineering & Traditional Crafts" }, "geometry": { "type": "Point", "coordinates": [115.1100, -8.4800] } }
-  ]
-};
-
 // ── Project Modes Definition ─────────────────
 const PROJECT_MODES = {
   'drone-mapping': {
@@ -68,7 +18,7 @@ const PROJECT_MODES = {
       { label: 'Sensor Payload', val: 'RGB 4K + Multispectral' },
       { label: 'Geographic Extent', val: 'Indonesia Nationwide' }
     ],
-    center: [-1.8, 116.15],
+    center: [-2.46625, 117.99611],
     zoom: 5,
     layers: [
       {
@@ -76,7 +26,6 @@ const PROJECT_MODES = {
         name: 'Drone Survey Locations',
         color: '#0F766E',
         type: 'geojson',
-        data: DRONE_SURVEY_DATA,
         url: 'data/Location_Drone.geojson',
         visible: true,
       },
@@ -98,7 +47,7 @@ const PROJECT_MODES = {
       { label: 'Project Status', val: '3 Done, 3 Active, 1 Planning' },
       { label: 'Field Specialists', val: '14 Specialists Deployed' }
     ],
-    center: [-1.2, 116.5],
+    center: [-2.46625, 117.99611],
     zoom: 5,
     layers: [
       {
@@ -106,7 +55,6 @@ const PROJECT_MODES = {
         name: 'Active Field Programs',
         color: '#2563EB',
         type: 'geojson',
-        data: PROGRAM_TRACKING_DATA,
         url: 'data/Program_Tracking.geojson',
         visible: true,
       },
@@ -128,7 +76,7 @@ const PROJECT_MODES = {
       { label: 'Evaluated Factors', val: 'Slope, Soil, Hydrology, Road' },
       { label: 'Exclusion Buffer', val: '500m Conservation Buffer' }
     ],
-    center: [-4.5, 118.0],
+    center: [-2.46625, 117.99611],
     zoom: 5,
     layers: [
       {
@@ -136,7 +84,6 @@ const PROJECT_MODES = {
         name: 'Suitability Potential Zones',
         color: '#D97706',
         type: 'geojson',
-        data: POTENTIAL_ANALYSIS_DATA,
         url: 'data/Potential_Analysis.geojson',
         visible: true,
       },
@@ -158,15 +105,14 @@ const PROJECT_MODES = {
       { label: 'Mapped Canopy', val: '244.5 Hectares' },
       { label: 'Classification Accuracy', val: '92.8% Producer Acc.' }
     ],
-    center: [-7.8, 115.5],
-    zoom: 6,
+    center: [-2.46625, 117.99611],
+    zoom: 5,
     layers: [
       {
         id: 'ov-bamboo-stands',
         name: 'Bamboo Canopy & Species',
         color: '#16A34A',
         type: 'geojson',
-        data: BAMBOO_IDENTIFICATION_DATA,
         url: 'data/Bamboo_Identification.geojson',
         visible: true,
       },
@@ -182,12 +128,11 @@ let OVERLAYS = [...PROJECT_MODES['drone-mapping'].layers];
 // ── State ───────────────────────────────────
 let map;
 let overlayLayers = {};
-let overlayData = {};
 
 // ── Initialise Map ──────────────────────────
 function initMap() {
   map = L.map('map', {
-    center: [-1.8, 116.15],
+    center: [-2.46625, 117.99611],
     zoom: 5,
     zoomControl: true,
     attributionControl: true,
@@ -199,10 +144,6 @@ function initMap() {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
     eferrerPolicy: 'no-referrer-when-downgrade',
   }).addTo(map);
-
-  // Map events
-  map.on('moveend zoomend', updateMapInfo);
-  updateMapInfo();
 
   // Build UI
   buildOverlayList();
@@ -257,7 +198,6 @@ async function toggleOverlay(id, visible) {
     }
   }
 
-  updateMapInfo();
 }
 
 // ── Feature Popup Formatter ─────────────────
@@ -383,37 +323,16 @@ async function loadOverlay(ov) {
           });
         },
       });
-    } else if (ov.data) {
-      let data = ov.data;
-      if (ov.url) {
-        try {
-          const resp = await fetch(ov.url);
-          if (resp.ok) data = await resp.json();
-        } catch (e) {}
-      }
-      overlayData[ov.id] = data;
-      overlayLayers[ov.id] = createGeoJsonLayer(data, ov);
     } else if (ov.type === 'geojson') {
+      if (!ov.url) throw new Error(`No GeoJSON file configured for overlay ${ov.id}`);
       const resp = await fetch(ov.url);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status} loading ${ov.url}`);
       const data = await resp.json();
-      overlayData[ov.id] = data;
       overlayLayers[ov.id] = createGeoJsonLayer(data, ov);
     }
   } catch (err) {
-    console.warn(`Failed to load overlay ${ov.id}:`, err);
-    overlayLayers[ov.id] = L.layerGroup();
+    console.error(`Failed to load overlay ${ov.id}:`, err);
   }
-}
-
-// ── Update map info panel ───────────────────
-function updateMapInfo() {
-  const center = map.getCenter();
-  document.getElementById('info-zoom').textContent = map.getZoom();
-  document.getElementById('info-center').textContent =
-    `${center.lat.toFixed(2)}, ${center.lng.toFixed(2)}`;
-
-  const activeLayers = OVERLAYS.filter(o => o.visible).length; // OSM basemap temporarily hidden
-  document.getElementById('info-layers').textContent = activeLayers;
 }
 
 // ── Panel collapse toggle ───────────────────
@@ -450,16 +369,15 @@ function switchProjectMode(modeKey) {
   if (!mode) return;
   currentMode = modeKey;
 
-  // 1. Remove non-custom layers of previous mode from map
+  // 1. Remove layers of previous mode from map
   OVERLAYS.forEach(ov => {
-    if (!ov.isCustom && overlayLayers[ov.id] && map.hasLayer(overlayLayers[ov.id])) {
+    if (overlayLayers[ov.id] && map.hasLayer(overlayLayers[ov.id])) {
       map.removeLayer(overlayLayers[ov.id]);
     }
   });
 
-  // 2. Set new OVERLAYS (preserving any custom user-added GeoJSONs)
-  const customLayers = OVERLAYS.filter(ov => ov.isCustom);
-  OVERLAYS = [...mode.layers, ...customLayers];
+  // 2. Set new OVERLAYS
+  OVERLAYS = [...mode.layers];
 
   // 3. Pan / zoom to mode focus
   if (mode.center && mode.zoom) {
@@ -479,8 +397,6 @@ function switchProjectMode(modeKey) {
   // 6. Update Sidebar Information
   updateSidebarInfo(mode);
 
-  // 7. Update Map Info
-  updateMapInfo();
 }
 
 function updateSidebarInfo(mode) {
@@ -534,87 +450,10 @@ function initModeSwitcher() {
   });
 }
 
-// ── Dynamic GeoJSON Uploader / Drag & Drop ────
-function initGeoJsonLoader() {
-  const fileInput = document.getElementById('geojson-file-input');
-  const addBtn = document.getElementById('btn-add-layer');
-  const mapEl = document.getElementById('map');
-
-  if (addBtn && fileInput) {
-    addBtn.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', (e) => {
-      handleGeoJsonFiles(e.target.files);
-      fileInput.value = '';
-    });
-  }
-
-  if (mapEl) {
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
-      mapEl.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    });
-
-    mapEl.addEventListener('drop', (e) => {
-      if (e.dataTransfer && e.dataTransfer.files) {
-        handleGeoJsonFiles(e.dataTransfer.files);
-      }
-    });
-  }
-}
-
-function handleGeoJsonFiles(files) {
-  const palette = ['#0F766E', '#2563EB', '#D97706', '#9333EA', '#E11D48', '#059669', '#0284C7'];
-  Array.from(files).forEach((file, idx) => {
-    if (!file.name.endsWith('.geojson') && !file.name.endsWith('.json')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        const cleanName = file.name.replace(/\.(geo)?json$/i, '').replace(/[-_]/g, ' ');
-        const layerName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-        const color = palette[(OVERLAYS.length + idx) % palette.length];
-        addCustomGeoJsonLayer(layerName, data, color);
-      } catch (err) {
-        console.error('Error parsing GeoJSON file:', err);
-      }
-    };
-    reader.readAsText(file);
-  });
-}
-
-function addCustomGeoJsonLayer(name, geojsonData, color) {
-  const id = 'ov-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now();
-  const newOverlay = {
-    id: id,
-    name: name,
-    color: color || '#0F766E',
-    type: 'geojson',
-    visible: true,
-  };
-
-  overlayData[id] = geojsonData;
-  overlayLayers[id] = createGeoJsonLayer(geojsonData, newOverlay);
-  OVERLAYS.push(newOverlay);
-
-  overlayLayers[id].addTo(map);
-  buildOverlayList();
-  updateMapInfo();
-
-  try {
-    const bounds = overlayLayers[id].getBounds();
-    if (bounds && bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
-    }
-  } catch (err) {}
-}
-
 // ── Init everything ─────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initPanelCollapse();
   initModeSwitcher();
-  initGeoJsonLoader();
   initScrollAnimations();
 });
