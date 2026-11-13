@@ -1,0 +1,89 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Forest Restoration Monitoring",
+        "Location": "Medan, North Sumatra",
+        "Status": "Completed",
+        "Progress": "100%",
+        "Field Team": "Sumatra Alpha (4 staff)",
+        "Target Area": "1,200 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [98.6722, 3.5952] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Peatland Hydrology Sensor Array",
+        "Location": "Pekanbaru, Riau",
+        "Status": "In Progress",
+        "Progress": "72%",
+        "Field Team": "Central Peat Unit (3 staff)",
+        "Target Area": "3,400 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [101.4478, 0.5071] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Canopy Cover & Carbon Verification",
+        "Location": "Palangkaraya, Central Kalimantan",
+        "Status": "In Progress",
+        "Progress": "85%",
+        "Field Team": "Borneo Ecology Group (4 staff)",
+        "Target Area": "5,800 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [113.9213, -2.2161] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Watershed Boundary Delineation",
+        "Location": "Samarinda, East Kalimantan",
+        "Status": "Completed",
+        "Progress": "100%",
+        "Field Team": "Mahakam Hydrology (3 staff)",
+        "Target Area": "2,150 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [117.1536, -0.5022] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Coastal Mangrove Spatial Audit",
+        "Location": "Makassar, South Sulawesi",
+        "Status": "In Progress",
+        "Progress": "60%",
+        "Field Team": "Sulawesi Marine GIS (2 staff)",
+        "Target Area": "850 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [119.4327, -5.1477] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Highland Agroforestry Baseline",
+        "Location": "Jayapura, Papua",
+        "Status": "Planning",
+        "Progress": "25%",
+        "Field Team": "Eastern Operations (2 staff)",
+        "Target Area": "4,100 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [140.7181, -2.5916] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Project": "Urban Microclimate Assessment",
+        "Location": "Bandung, West Java",
+        "Status": "Completed",
+        "Progress": "100%",
+        "Field Team": "Java Regional (3 staff)",
+        "Target Area": "920 Ha"
+      },
+      "geometry": { "type": "Point", "coordinates": [107.6191, -6.9175] }
+    }
+  ]
+}

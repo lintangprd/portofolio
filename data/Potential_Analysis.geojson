@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "South Garut Solar & Micro-hydro Hub",
+        "Classification": "High Potential Tier 1",
+        "Suitability Score": "94/100",
+        "Terrain Slope": "4.2% (Optimal)",
+        "Solar Yield": "5.6 kWh/m²/day",
+        "Environmental Clearance": "Granted"
+      },
+      "geometry": { "type": "Point", "coordinates": [107.7850, -7.3820] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "Kupang Renewable Energy Corridor",
+        "Classification": "High Potential Tier 1",
+        "Suitability Score": "92/100",
+        "Terrain Slope": "3.1% (Flat plain)",
+        "Solar Yield": "5.9 kWh/m²/day",
+        "Environmental Clearance": "Approved"
+      },
+      "geometry": { "type": "Point", "coordinates": [123.6070, -10.1772] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "Sumba Agro-Ecological Development Zone",
+        "Classification": "Moderate Potential Tier 2",
+        "Suitability Score": "78/100",
+        "Terrain Slope": "7.5% (Rolling)",
+        "Water Proximity": "1.4 km",
+        "Recommended Activity": "Drought-Resistant Silvopasture"
+      },
+      "geometry": { "type": "Point", "coordinates": [119.8970, -9.6540] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "North Bali Eco-Corridor",
+        "Classification": "High Potential Tier 1",
+        "Suitability Score": "88/100",
+        "Terrain Slope": "5.0% (Gentle)",
+        "Road Access": "320m",
+        "Recommended Activity": "Eco-tourism & Watershed Buffering"
+      },
+      "geometry": { "type": "Point", "coordinates": [115.1950, -8.2150] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "East Kutai Sustainable Forestry Zone",
+        "Classification": "High Potential Tier 1",
+        "Suitability Score": "89/100",
+        "Terrain Slope": "6.1%",
+        "Soil Fertility": "Class II Alluvial",
+        "Recommended Activity": "Non-Timber Forest Products (NTFP)"
+      },
+      "geometry": { "type": "Point", "coordinates": [117.4800, 0.4200] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Zone": "South Merauke Biomass Expansion Area",
+        "Classification": "Moderate Potential Tier 2",
+        "Suitability Score": "74/100",
+        "Terrain Slope": "1.5% (Floodplain)",
+        "Drainage Class": "Moderate",
+        "Recommended Activity": "Native Bamboo & Wetland Crop"
+      },
+      "geometry": { "type": "Point", "coordinates": [140.4000, -8.4900] }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "Tabanan, Bali"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.126709,
+                    -8.418152
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "Banyuwangi, East Java"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    114.350376,
+                    -8.147154
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "Flores, East Nusa Tenggara"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.362784,
+                    -8.708448
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "Garut, West Java"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.812521,
+                    -7.132299
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "South East Sumba, East Nusa Tenggara"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    119.008852,
+                    -9.541857
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Location": "Mimika, Central Papua"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.874604,
+                    -4.620064
+                ]
+            }
+        }
+    ]
+}

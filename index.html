@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIS Analyst Portfolio</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ───────── HERO ───────── -->
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-tag">GIS Analyst &amp; Spatial Data Specialist</p>
+      <h1 class="hero-title">Mapping the world,<br /><span class="accent">one layer at a time.</span></h1>
+      <p class="hero-sub">Turning geospatial data into actionable insights through cartography, remote sensing, and spatial analysis.</p>
+      <div class="hero-cta">
+        <a href="#map-section" class="btn btn-primary">Explore the Map</a>
+        <a href="#projects" class="btn btn-outline">View Projects</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ───────── ABOUT ───────── -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">About Me</span>
+        <h2>Spatial thinker.<br />Data storyteller.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a GIS Analyst with 5+ years of experience in geospatial analysis, cartographic design, and web mapping development. I specialize in transforming complex spatial datasets into clear, interactive visualizations that drive decision-making.</p>
+          <p>My expertise spans remote sensing, spatial statistics, geoprocessing automation, and full-stack WebGIS development. I work with tools like ArcGIS, QGIS, PostGIS, Python, and JavaScript mapping libraries to deliver end-to-end geospatial solutions.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Projects Delivered</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">12</span>
+              <span class="stat-label">Clients Served</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">5</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <div class="about-image-placeholder">
+            <div class="placeholder-icon">🌍</div>
+            <span>Your Photo Here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── MAP SECTION ───────── -->
+  <section class="section map-section" id="map-section">
+    <div class="container-full">
+      <div class="section-header centered">
+        <span class="section-tag">Interactive WebGIS</span>
+        <h2>Explore the Layers</h2>
+        <p class="section-desc">Switch between different overlay layers to explore spatial data. Each layer represents a different perspective of geospatial analysis. Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.</p>
+      </div>
+
+      <!-- Centered Project Mode Switcher -->
+      <div class="project-modes-bar" id="project-modes">
+        <button class="mode-btn active" data-mode="drone-mapping" type="button">Drone Mapping</button>
+        <button class="mode-btn" data-mode="program-tracking" type="button">Program Tracking</button>
+        <button class="mode-btn" data-mode="potential-analysis" type="button">Potential Analysis</button>
+        <button class="mode-btn" data-mode="bamboo-identification" type="button">Bamboo Identification</button>
+      </div>
+
+      <div class="map-layout">
+        <!-- Map Column (3/4 width) -->
+        <div class="map-wrapper">
+          <!-- Layer Control Panel -->
+          <div class="layer-panel" id="layer-panel">
+            <div class="layer-panel-header">
+              <h3>🗺️ Layers</h3>
+              <button class="panel-collapse" id="panel-collapse" aria-label="Collapse panel">‹</button>
+            </div>
+
+            <div class="layer-group">
+              <h4 class="layer-group-title">Overlays</h4>
+              <div class="layer-list" id="overlay-list">
+                <!-- populated by JS -->
+              </div>
+              <div class="layer-actions">
+                <input type="file" id="geojson-file-input" accept=".geojson,.json" multiple style="display:none;" />
+                <button class="btn-add-layer" id="btn-add-layer" title="Load additional GeoJSON files">
+                  <span>➕</span> Add GeoJSON
+                </button>
+              </div>
+            </div>
+
+            <div class="layer-group">
+              <h4 class="layer-group-title">Map Info</h4>
+              <div class="map-info" id="map-info">
+                <div class="info-row"><span class="info-label">Zoom:</span><span id="info-zoom">5</span></div>
+                <div class="info-row"><span class="info-label">Center:</span><span id="info-center">-1.80, 116.15</span></div>
+                <div class="info-row"><span class="info-label">Layers:</span><span id="info-layers">2</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- The Map -->
+          <div class="map-container" id="map"></div>
+        </div>
+
+        <!-- Information Column (1/4 width) -->
+        <aside class="map-sidebar">
+          <div class="sidebar-header">
+            <span class="sidebar-tag">Survey &amp; Spatial Analysis</span>
+            <h3 class="sidebar-title">UAV Drone Survey &amp; Regional Coverage</h3>
+          </div>
+
+          <div class="sidebar-body">
+            <p>
+              This WebGIS interface visualizes primary unmanned aerial vehicle (UAV) acquisition sites and administrative boundaries across the Indonesian archipelago. The active geospatial layers delineate key aerial photogrammetry corridors, topographic flight waypoints, and sovereign territorial boundaries.
+            </p>
+            <p>
+              Captured survey nodes cover critical geographical regions including Tabanan (Bali), Banyuwangi (East Java), Garut (West Java), Flores &amp; Sumba (East Nusa Tenggara), and Mimika (Central Papua). These datasets support digital elevation models (DEM), dense point clouds, orthomosaic stitching, and environmental baseline monitoring.
+            </p>
+          </div>
+
+          <div class="sidebar-meta">
+            <div class="meta-item">
+              <span class="meta-label">Spatial Reference</span>
+              <span class="meta-val">EPSG:4326 (WGS 84)</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Survey Points</span>
+              <span class="meta-val" id="meta-point-count">6 Waypoints</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Geographic Extent</span>
+              <span class="meta-val">Indonesia Nationwide</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Selected Node</span>
+              <span class="meta-val" id="meta-selected-feature">Click a waypoint</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PROJECTS ───────── -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="section-tag">Featured Work</span>
+        <h2>Projects</h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #0d9488, #065f46);">
+            <span class="project-emoji">🌳</span>
+          </div>
+          <div class="project-body">
+            <h3>Urban Green Space Analysis</h3>
+            <p>Analyzed urban canopy coverage using Sentinel-2 imagery and NDVI classification to identify green space deserts in metropolitan areas.</p>
+            <div class="project-tags">
+              <span>Remote Sensing</span><span>Python</span><span>QGIS</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #2563eb, #1e3a5f);">
+            <span class="project-emoji">🌊</span>
+          </div>
+          <div class="project-body">
+            <h3>Flood Risk Mapping</h3>
+            <p>Developed an interactive flood risk assessment tool combining DEM analysis, hydrological modeling, and real-time weather data integration.</p>
+            <div class="project-tags">
+              <span>Hydrology</span><span>Leaflet</span><span>PostGIS</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #d97706, #92400e);">
+            <span class="project-emoji">🏗️</span>
+          </div>
+          <div class="project-body">
+            <h3>Infrastructure Suitability Model</h3>
+            <p>Built a multi-criteria site suitability model for renewable energy infrastructure using weighted overlay analysis and terrain factors.</p>
+            <div class="project-tags">
+              <span>ArcGIS Pro</span><span>Spatial Analysis</span><span>MCE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── CONTACT ───────── -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="section-tag">Get In Touch</span>
+        <h2>Let's Collaborate</h2>
+      </div>
+      <div class="contact-grid contact-grid--centered">
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <h4>Phone</h4>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            <div>
+              <h4>LinkedIn</h4>
+              <p>linkedin.com/in/gisanalyst</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <div>
+              <h4>GitHub</h4>
+              <p>github.com/gisanalyst</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <h4>Location</h4>
+              <p>Available Worldwide (Remote)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── FOOTER ───────── -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 GeoPortfolio. Built with Leaflet.js &amp; open geospatial data.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
