@@ -80,14 +80,7 @@ const PROJECT_MODES = {
         url: 'data/Location_Drone.geojson',
         visible: true,
       },
-      {
-        id: 'ov-boundaries',
-        name: 'Country Boundaries',
-        color: '#f59e0b',
-        type: 'wms',
-        visible: true,
-        geojson: true,
-      }
+
     ]
   },
 
@@ -117,14 +110,7 @@ const PROJECT_MODES = {
         url: 'data/Program_Tracking.geojson',
         visible: true,
       },
-      {
-        id: 'ov-boundaries',
-        name: 'Country Boundaries',
-        color: '#f59e0b',
-        type: 'wms',
-        visible: true,
-        geojson: true,
-      }
+ 
     ]
   },
 
@@ -154,14 +140,7 @@ const PROJECT_MODES = {
         url: 'data/Potential_Analysis.geojson',
         visible: true,
       },
-      {
-        id: 'ov-boundaries',
-        name: 'Country Boundaries',
-        color: '#f59e0b',
-        type: 'wms',
-        visible: true,
-        geojson: true,
-      }
+
     ]
   },
 
@@ -191,14 +170,7 @@ const PROJECT_MODES = {
         url: 'data/Bamboo_Identification.geojson',
         visible: true,
       },
-      {
-        id: 'ov-boundaries',
-        name: 'Country Boundaries',
-        color: '#f59e0b',
-        type: 'wms',
-        visible: true,
-        geojson: true,
-      }
+
     ]
   }
 };
