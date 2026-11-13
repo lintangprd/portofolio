@@ -221,10 +221,11 @@ function initMap() {
     attributionControl: true,
   });
 
+  // Temporarily hidden OSM basemap layer
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-   maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
-  referrerPolicy: 'no-referrer-when-downgrade',
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+    eferrerPolicy: 'no-referrer-when-downgrade',
   }).addTo(map);
 
   // Map events
