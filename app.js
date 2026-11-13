@@ -128,7 +128,6 @@ let OVERLAYS = [...PROJECT_MODES['drone-mapping'].layers];
 // ── State ───────────────────────────────────
 let map;
 let overlayLayers = {};
-let overlayData = {};
 
 // ── Initialise Map ──────────────────────────
 function initMap() {
@@ -334,7 +333,6 @@ async function loadOverlay(ov) {
       const resp = await fetch(ov.url);
       if (!resp.ok) throw new Error(`HTTP ${resp.status} loading ${ov.url}`);
       const data = await resp.json();
-      overlayData[ov.id] = data;
       overlayLayers[ov.id] = createGeoJsonLayer(data, ov);
     }
   } catch (err) {
@@ -387,16 +385,15 @@ function switchProjectMode(modeKey) {
   if (!mode) return;
   currentMode = modeKey;
 
-  // 1. Remove non-custom layers of previous mode from map
+  // 1. Remove layers of previous mode from map
   OVERLAYS.forEach(ov => {
-    if (!ov.isCustom && overlayLayers[ov.id] && map.hasLayer(overlayLayers[ov.id])) {
+    if (overlayLayers[ov.id] && map.hasLayer(overlayLayers[ov.id])) {
       map.removeLayer(overlayLayers[ov.id]);
     }
   });
 
-  // 2. Set new OVERLAYS (preserving any custom user-added GeoJSONs)
-  const customLayers = OVERLAYS.filter(ov => ov.isCustom);
-  OVERLAYS = [...mode.layers, ...customLayers];
+  // 2. Set new OVERLAYS
+  OVERLAYS = [...mode.layers];
 
   // 3. Pan / zoom to mode focus
   if (mode.center && mode.zoom) {
@@ -471,87 +468,10 @@ function initModeSwitcher() {
   });
 }
 
-// ── Dynamic GeoJSON Uploader / Drag & Drop ────
-function initGeoJsonLoader() {
-  const fileInput = document.getElementById('geojson-file-input');
-  const addBtn = document.getElementById('btn-add-layer');
-  const mapEl = document.getElementById('map');
-
-  if (addBtn && fileInput) {
-    addBtn.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', (e) => {
-      handleGeoJsonFiles(e.target.files);
-      fileInput.value = '';
-    });
-  }
-
-  if (mapEl) {
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
-      mapEl.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    });
-
-    mapEl.addEventListener('drop', (e) => {
-      if (e.dataTransfer && e.dataTransfer.files) {
-        handleGeoJsonFiles(e.dataTransfer.files);
-      }
-    });
-  }
-}
-
-function handleGeoJsonFiles(files) {
-  const palette = ['#0F766E', '#2563EB', '#D97706', '#9333EA', '#E11D48', '#059669', '#0284C7'];
-  Array.from(files).forEach((file, idx) => {
-    if (!file.name.endsWith('.geojson') && !file.name.endsWith('.json')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        const cleanName = file.name.replace(/\.(geo)?json$/i, '').replace(/[-_]/g, ' ');
-        const layerName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-        const color = palette[(OVERLAYS.length + idx) % palette.length];
-        addCustomGeoJsonLayer(layerName, data, color);
-      } catch (err) {
-        console.error('Error parsing GeoJSON file:', err);
-      }
-    };
-    reader.readAsText(file);
-  });
-}
-
-function addCustomGeoJsonLayer(name, geojsonData, color) {
-  const id = 'ov-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now();
-  const newOverlay = {
-    id: id,
-    name: name,
-    color: color || '#0F766E',
-    type: 'geojson',
-    visible: true,
-  };
-
-  overlayData[id] = geojsonData;
-  overlayLayers[id] = createGeoJsonLayer(geojsonData, newOverlay);
-  OVERLAYS.push(newOverlay);
-
-  overlayLayers[id].addTo(map);
-  buildOverlayList();
-  updateMapInfo();
-
-  try {
-    const bounds = overlayLayers[id].getBounds();
-    if (bounds && bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
-    }
-  } catch (err) {}
-}
-
 // ── Init everything ─────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initPanelCollapse();
   initModeSwitcher();
-  initGeoJsonLoader();
   initScrollAnimations();
 });

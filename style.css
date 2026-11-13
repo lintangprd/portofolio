@@ -352,22 +352,6 @@ a { color: var(--accent); text-decoration: none; }
   width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0;
 }
 
-.layer-actions {
-  margin-top: 10px; padding-top: 8px;
-  border-top: 1px dashed var(--border);
-}
-.btn-add-layer {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  width: 100%; padding: 7px 12px; border-radius: var(--radius-xs);
-  background: var(--bg); border: 1px dashed var(--border-hover);
-  color: var(--text-dim); font-size: .78rem; font-weight: 600;
-  cursor: pointer; transition: all var(--transition);
-}
-.btn-add-layer:hover {
-  background: #ffffff; color: var(--accent); border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
-}
-
 /* Map info */
 .map-info { font-family: var(--font-mono); font-size: .75rem; }
 .info-row { display: flex; justify-content: space-between; padding: 4px 0; }
